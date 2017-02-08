@@ -22,7 +22,7 @@ class ClashBot
 			action = command[1]
 			variable = command[2..(command.count)].join(" ")
 
-			if bot == "bot"
+			if !bot.match(/bot/im).nil?
 			  response = case action
 			  when 'hi' then
 			  	"Hi <@#{data.user}>!"
@@ -42,7 +42,6 @@ class ClashBot
 			  	"?????"
 			  end
 		    @client.message channel: data.channel, text: response
-
 			end
 		end
 	end
