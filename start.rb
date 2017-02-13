@@ -1,13 +1,13 @@
 require './lib/clash_bot'
+require 'yaml'
 
-slack_token = ARGV[0]
-clash_token = ARGV[1]
+TOKEN = YAML.load_file('./config.yml')
 
 Slack.configure do |config|
-	config.token = slack_token
+	config.token = TOKEN["slack"]
 end
 
-bot = ClashBot.new(clash_token)
+bot = ClashBot.new(TOKEN["clash"])
 
 bot.messages
 
