@@ -3,7 +3,7 @@ PID=bot.pid
 
 case "$COMMAND" in
 	start)
-		if [ ! -f $PID ]; then
+		if [ ! -f "$PID" ]; then
 			nohup ruby start.rb &
 			echo "$!" > $PID
 			echo "$!"
@@ -12,9 +12,11 @@ case "$COMMAND" in
 		fi
 		;;
 	stop)
-		line=$(head -1 $PID)
-		kill -9 $line
-		rm $PID
+		if [ -f "$PID" ]; then
+			line=$(head -1 $PID)
+			kill -9 $line
+			rm $PID
+		fi
 		;;
 	pid)
 		line=$(head -1 $PID)
