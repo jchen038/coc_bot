@@ -18,6 +18,16 @@ case "$COMMAND" in
 			rm $PID
 		fi
 		;;
+	restart)
+		if [ -f "$PID" ]; then
+			line=$(head -1 $PID)
+			kill -9 $line
+			rm $PID
+		fi
+		nohup ruby start.rb &
+		echo "$!" > $PID
+		echo "$!"
+		;;
 	pid)
 		line=$(head -1 $PID)
 		echo $line
